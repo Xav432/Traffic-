@@ -1,0 +1,161 @@
+Traffic.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traffic Light Simulator</title>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        /* 🩷 LIGHT PINK BACKGROUND */
+        background: linear-gradient(135deg, #fff0f5, #ffe4ec, #ffd6e0);
+        background-attachment: fixed;
+        position: relative;
+        overflow-x: hidden;
+    }
+    /* Soft dots pattern overlay */
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 25px 25px, rgba(255,182,193,0.15) 2%, transparent 0%),
+            radial-gradient(circle at 75px 75px, rgba(255,182,193,0.15) 2%, transparent 0%);
+        background-size: 100px 100px;
+        z-index: 0;
+    }
+    h1 {
+        color: #b3446c;
+        margin-bottom: 30px;
+        font-size: 24px;
+        position: relative;
+        z-index: 1;
+        text-shadow: 0 0 10px rgba(179,68,108,0.2);
+    }
+    .traffic-light {
+        background: #442233;
+        padding: 20px;
+        border-radius: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        box-shadow: 0 0 30px rgba(179,68,108,0.3), inset 0 0 10px rgba(255,255,255,0.1);
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 1;
+        border: 3px solid #774455;
+    }
+    .light {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: #553344;
+        box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+        transition: all 0.3s ease;
+        border: 2px solid #885566;
+    }
+    .red.active {
+        background: #ff6b8b;
+        box-shadow: 0 0 25px #ff6b8b, inset 0 0 15px rgba(255,107,139,0.4);
+    }
+    .yellow.active {
+        background: #ffd966;
+        box-shadow: 0 0 25px #ffd966, inset 0 0 15px rgba(255,217,102,0.4);
+    }
+    .green.active {
+        background: #74d6a0;
+        box-shadow: 0 0 25px #74d6a0, inset 0 0 15px rgba(116,214,160,0.4);
+    }
+    .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+    }
+    button {
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+    }
+    button:hover {
+        transform: scale(1.05);
+        opacity: 0.95;
+    }
+    .go-btn {
+        background: linear-gradient(145deg, #85e0b0, #74d6a0);
+        color: #2c4d3a;
+        box-shadow: 0 4px 15px rgba(116, 214, 160, 0.4);
+    }
+    .ready-btn {
+        background: linear-gradient(145deg, #ffe590, #ffd966);
+        color: #594a28;
+        box-shadow: 0 4px 15px rgba(255, 217, 102, 0.4);
+    }
+    .stop-btn {
+        background: linear-gradient(145deg, #ff8ea6, #ff6b8b);
+        color: #7a2c41;
+        box-shadow: 0 4px 15px rgba(255, 107, 139, 0.4);
+    }
+    .restart-btn {
+        background: linear-gradient(145deg, #f8c8e0, #f0a8c8);
+        color: #6b3d52;
+        box-shadow: 0 4px 15px rgba(240, 168, 200, 0.4);
+    }
+</style>
+</head>
+<body>
+    <h1>🚦 Traffic Light Simulator</h1>
+    <div class="traffic-light">
+        <div class="light red" id="red"></div>
+        <div class="light yellow" id="yellow"></div>
+        <div class="light green" id="green"></div>
+    </div>
+    <div class="buttons">
+        <button class="stop-btn" onclick="showStop()">Stop</button>
+        <button class="ready-btn" onclick="showReady()">Ready</button>
+        <button class="go-btn" onclick="showGo()">Go</button>
+        <button class="restart-btn" onclick="restart()">Restart</button>
+    </div>
+<script>
+function allOff() {
+    document.getElementById('red').classList.remove('active');
+    document.getElementById('yellow').classList.remove('active');
+    document.getElementById('green').classList.remove('active');
+}
+function showStop() {
+    allOff();
+    document.getElementById('red').classList.add('active');
+}
+function showReady() {
+    allOff();
+    document.getElementById('yellow').classList.add('active');
+}
+function showGo() {
+    allOff();
+    document.getElementById('green').classList.add('active');
+}
+function restart() {
+    allOff();
+}
+// Show Red light on load
+showStop();
+</script>
+</body>
+</html>
